@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "maison-verte": {
+      "hosting": {
+        "MV": [
+          "maison-verte"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "maison-verte"
+  }
+}
