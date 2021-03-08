@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CategorieService } from 'src/app/categorie.service';
+//import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-produit-formulaire',
@@ -6,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./produit-formulaire.component.css']
 })
 export class ProduitFormulaireComponent implements OnInit {
+  categories$;//: Observable<any[]>;
 
-  constructor() { }
+  constructor(categorieService: CategorieService) { 
+    this.categories$ = categorieService.getCategories();
+  }
 
   ngOnInit(): void {
   }

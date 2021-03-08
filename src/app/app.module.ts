@@ -26,6 +26,7 @@ import { AuthGuardService } from './auth-guard.service';
 import { UsagerService } from './usager.service';
 import { AdminAuthGuardService } from './admin-auth-guard.service';
 import { ProduitFormulaireComponent } from './admin/produit-formulaire/produit-formulaire.component';
+import { CategorieService } from './categorie.service';
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import { ProduitFormulaireComponent } from './admin/produit-formulaire/produit-f
     AuthService,
     AuthGuardService,
     UsagerService,
-    AdminAuthGuardService
+    AdminAuthGuardService,
+    CategorieService
   ],
   bootstrap: [AppComponent]
 })
