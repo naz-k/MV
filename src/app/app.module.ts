@@ -2,14 +2,18 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
-import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 
-import { environment } from 'src/environments/environment';
+
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+
+import { environment } from 'src/environments/environment';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
@@ -20,13 +24,14 @@ import { MesCommandesComponent } from './mes-commandes/mes-commandes.component';
 import { AdminProduitsComponent } from './admin/admin-produits/admin-produits.component';
 import { AdminCommandesComponent } from './admin/admin-commandes/admin-commandes.component';
 import { ConnexionComponent } from './connexion/connexion.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+
 import { AuthService } from './auth.service';
 import { AuthGuardService } from './auth-guard.service';
 import { UsagerService } from './usager.service';
 import { AdminAuthGuardService } from './admin-auth-guard.service';
 import { ProduitFormulaireComponent } from './admin/produit-formulaire/produit-formulaire.component';
 import { CategorieService } from './categorie.service';
+import { ProduitService } from './produit.service';
 
 
 @NgModule({
@@ -46,6 +51,7 @@ import { CategorieService } from './categorie.service';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,    
@@ -77,11 +83,12 @@ import { CategorieService } from './categorie.service';
     NgbModule
   ],
   providers: [
-    AuthService,
+    /*AuthService,
     AuthGuardService,
     UsagerService,
     AdminAuthGuardService,
-    CategorieService
+    CategorieService,*/
+    //ProduitService
   ],
   bootstrap: [AppComponent]
 })

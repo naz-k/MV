@@ -1,28 +1,28 @@
-<form>
+<form #f="ngForm" (ngSubmit)="sauvegarder(f.value)">
     <div class="form-group">
         <label for="titre">Nom de produit</label>
-        <input id="titre" type="text" class="form-control">
+        <input ngModel name="titre" id="titre" type="text" class="form-control">
     </div>
     <div class="form-group">
         <label for="prix">Prix</label>
         <div class="input-group mb-3">
             <span class="input-group-text">$</span>
-            <input id="prix" type="number" class="form-control">
+            <input ngModel name="prix" id="prix" type="number" class="form-control">
             <span class="input-group-text">.00</span>
         </div>        
     </div>
     <div class="form-group">
         <label for="categorie">Catégorie</label>
-        <select id="categorie" class="form-control">
+        <select ngModel name="categorie" id="categorie" class="form-control">
             <option value=""></option>
-            <option *ngFor="let c of categories$ | async" [value]="c.$key">
-                {{ c.nom }}
+            <option *ngFor="let c of categories$ | async" [value]="c.key">
+                {{ c.payload.val().nom }}
             </option>
         </select>
     </div>
     <div class="form-group">
         <label for="imageUrl">Url d'image</label>
-        <input id="imageUrl" type="text" class="form-control">
+        <input ngModel name= "imageUrl" id="imageUrl" type="text" class="form-control">
     </div>
     <button class="btn btn-primary">Sauvegarder</button>
 </form>
