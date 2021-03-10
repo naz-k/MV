@@ -11,4 +11,9 @@ export class ProduitService {
   creer(produit){
    return this.bd.list('/produits').push(produit);
   }
+
+  getListeProduits(){
+    return this.bd.list('/produits').valueChanges();
+     
+  }
 }
