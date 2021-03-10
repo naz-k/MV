@@ -10,10 +10,13 @@
         <label for="prix">Prix</label>
         <div class="input-group mb-3">
             <span class="input-group-text">$</span>
-            <input #prix="ngModel" ngModel name="prix" id="prix" type="number" class="form-control" required>
+            <input #prix="ngModel" ngModel name="prix" id="prix" type="number" class="form-control" required [min]="0" >
             <span class="input-group-text">.00</span>           
         </div>  
-        <div class="alert alert-danger" *ngIf="prix.touched && prix.invalid">Prix est requis.</div>      
+        <div class="alert alert-danger" *ngIf="prix.touched && prix.invalid">
+            <div *ngIf="prix.errors.required">Prix est requis.</div>
+            <div *ngIf="prix.errors.min">Prix doit être égal ou supérieur à 0.</div>            
+        </div>      
     </div>
     <div class="form-group">
         <label for="categorie">Catégorie</label>
@@ -29,9 +32,10 @@
     </div>
     <div class="form-group">
         <label for="imageUrl">Url d'image</label>
-        <input #imageUrl= "ngModel" ngModel name= "imageUrl" id="imageUrl" type="text" class="form-control" required>
+        <input #imageUrl= "ngModel" ngModel name= "imageUrl" id="imageUrl" type="text" class="form-control" required url>
         <div class="alert alert-danger" *ngIf="imageUrl.touched && imageUrl.invalid">
-            URL de l'image est requis.
+            <div *ngIf="imageUrl.errors.required"> URL de l'image est requis.</div>
+            <div *ngIf="imageUrl.errors.url"> Veuillez entrer une URL valide.</div>
         </div>
     </div>
     <button class="btn btn-primary">Sauvegarder</button>
