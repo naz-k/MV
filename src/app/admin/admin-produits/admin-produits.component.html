@@ -11,8 +11,8 @@
     </thead>
     <tbody>
         <tr *ngFor="let p of produits$ | async">
-            <td>{{ p.titre }}</td>
-            <td>{{ p.prix }}</td>
+            <td>{{ p.payload.val().titre }}</td>
+            <td>{{ p.payload.val().prix }}</td>
             <td>
               <a [routerLink]="['/admin/produits/', p.key]" >Modifier</a>
             </td>

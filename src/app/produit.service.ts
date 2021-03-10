@@ -6,14 +6,14 @@ import { AngularFireDatabase } from '@angular/fire/database';
 })
 export class ProduitService {
 
-  constructor(private bd: AngularFireDatabase) { }
+  constructor(private afDB: AngularFireDatabase) { }
 
   creer(produit){
-   return this.bd.list('/produits').push(produit);
+   return this.afDB.list('/produits').push(produit);
   }
 
   getListeProduits(){
-    return this.bd.list('/produits').valueChanges();
+    return this.afDB.list('/produits');
      
   }
 }
