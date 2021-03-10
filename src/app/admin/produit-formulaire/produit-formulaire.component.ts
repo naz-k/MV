@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CategorieService } from 'src/app/categorie.service';
 import { ProduitService } from 'src/app/produit.service';
 //import { Observable } from 'rxjs';
@@ -11,13 +12,17 @@ import { ProduitService } from 'src/app/produit.service';
 export class ProduitFormulaireComponent implements OnInit {
   categories$;
 
-  constructor(categorieService: CategorieService, private produitService: ProduitService) { 
+  constructor(
+    private router: Router,
+    private categorieService: CategorieService, 
+    private produitService: ProduitService) { 
     this.categories$ = categorieService.getCategories();
   }
 
   sauvegarder(produit){
      //console.log(produit);
      this.produitService.creer(produit);
+     this.router.navigate(['admin/produits']);
   }
 
   ngOnInit(): void {
