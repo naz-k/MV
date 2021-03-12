@@ -6,14 +6,22 @@ import { AngularFireDatabase } from '@angular/fire/database';
 })
 export class ProduitService {
 
-  constructor(private afDB: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase) { }
 
   creer(produit){
-   return this.afDB.list('/produits').push(produit);
+   return this.db.list('/produits').push(produit);
   }
 
   getListeProduits(){
-    return this.afDB.list('/produits');
+    return this.db.list('/produits');
      
+  }
+
+  getProduit(produitId){
+    return this.db.object('/produits/'+ produitId).valueChanges();
+  }
+
+  mettreAjour(produitId, produit) {
+    return this.db.object('/produits/'+produitId).update(produit);
   }
 }

@@ -55,6 +55,7 @@ import { ProduitService } from './produit.service';
     FormsModule,
     CustomFormsModule,
     AppRoutingModule,
+    NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,    
     AngularFireDatabaseModule,
@@ -69,20 +70,24 @@ import { ProduitService } from './produit.service';
       { path: 'commande-reussie', component: CommandeReussieComponent, canActivate: [AuthGuardService] },
       { path: 'mes/commandes', component: MesCommandesComponent, canActivate: [AuthGuardService] },
       
-      { path: 'admin/produits',
-        component: AdminProduitsComponent,
-        canActivate: [AuthGuardService, AdminAuthGuardService]
-       },
+      
        { path: 'admin/produits/nouveau',
         component: ProduitFormulaireComponent,
         canActivate: [AuthGuardService, AdminAuthGuardService]
        },
-      { path: 'admin/commandes',
+       { path: 'admin/produits/:id',
+        component: ProduitFormulaireComponent,
+        canActivate: [AuthGuardService, AdminAuthGuardService]
+       },
+       { path: 'admin/produits',
+        component: AdminProduitsComponent,
+        canActivate: [AuthGuardService, AdminAuthGuardService]
+       },
+       { path: 'admin/commandes',
         component: AdminCommandesComponent,
         canActivate: [AuthGuardService, AdminAuthGuardService]
        }
-    ]),
-    NgbModule
+    ])
   ],
   providers: [
     /*AuthService,
