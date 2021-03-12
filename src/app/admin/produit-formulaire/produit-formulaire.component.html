@@ -3,7 +3,6 @@
         <form #f="ngForm" (ngSubmit)="sauvegarder(f.value)">
             <div class="form-group">
                 <label for="titre">Nom de produit</label>
-                <!-- <input #titre="ngModel" ngModel name="titre" id="titre" type="text" class="form-control" required> -->
                 <input #titre="ngModel" [(ngModel)]="produit.titre" name="titre" id="titre" type="text" class="form-control" required>
                 <div class="alert alert-danger" *ngIf="titre.touched && titre.invalid">
                     Nom de produit est requis.
@@ -40,9 +39,9 @@
                     <div *ngIf="imageUrl.errors.required"> URL de l'image est requis.</div>
                     <div *ngIf="imageUrl.errors.url"> Veuillez entrer une URL valide.</div>
                 </div>
-            </div>
+            </div> <br>
             <button class="btn btn-primary">Sauvegarder</button>
-            <button type="button" (click)="supprimer()" class="btn-danger">Supprimer</button>
+            <button type="button" (click)="supprimer()" class="btn btn-danger" style="margin-left: 1.5cm;">Supprimer</button>
         </form>        
     </div>
     <div class="col-md-6">
