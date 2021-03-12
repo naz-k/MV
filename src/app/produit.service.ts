@@ -24,4 +24,8 @@ export class ProduitService {
   mettreAjour(produitId, produit) {
     return this.db.object('/produits/'+produitId).update(produit);
   }
+
+  enlever(produitId){
+    return this.db.object('/produits/' + produitId).remove();
+  }
 }

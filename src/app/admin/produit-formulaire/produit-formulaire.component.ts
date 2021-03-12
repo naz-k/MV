@@ -38,8 +38,15 @@ export class ProduitFormulaireComponent implements OnInit {
   sauvegarder(produit){    
      if(this.id)  this.produitService.mettreAjour(this.id, produit);
      else this.produitService.creer(produit);
-     
+
      this.router.navigate(['admin/produits']);
+  }
+
+  supprimer(){
+    if(!confirm('Êtes-vous sûr de vouloir supprimer ce produit?')) return;
+
+      this.produitService.enlever(this.id);
+      this.router.navigate(['admin/produits']);    
   }
 
   ngOnInit(): void {
