@@ -44,8 +44,9 @@
             <button type="button" (click)="supprimer()" class="btn btn-danger" style="margin-left: 1.5cm;">Supprimer</button>
         </form>        
     </div>
+    <!-- Carte de produit -->
     <div class="col-md-6">
-        <div class="card" style="width: 18rem;">
+        <div *ngIf="produit.titre" class="card" style="width: 18rem;">
             <img [src]="produit.imageUrl" class="card-img-top" *ngIf="produit.imageUrl">
             <div class="card-body">
               <h5 class="card-title">{{ produit.titre }}</h5>
