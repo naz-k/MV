@@ -19,7 +19,7 @@ import { DataTablesModule } from "angular-datatables";
 import { environment } from 'src/environments/environment';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { HomeComponent } from './home/home.component';
-import { ProductsComponent } from './products/products.component';
+import { ProduitsComponent } from './produits/produits.component';
 import { PanierComponent } from './panier/panier.component';
 import { VerificationComponent } from './verification/verification.component';
 import { CommandeReussieComponent } from './commande-reussie/commande-reussie.component';
@@ -42,7 +42,7 @@ import { ProduitService } from './produit.service';
     AppComponent,
     BsNavbarComponent,
     HomeComponent,
-    ProductsComponent,
+    ProduitsComponent,
     PanierComponent,
     VerificationComponent,
     CommandeReussieComponent,
@@ -64,8 +64,8 @@ import { ProduitService } from './produit.service';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
-      { path: 'products', component: ProductsComponent },
+      { path: '', component: ProduitsComponent },
+      { path: 'produits', component: ProduitsComponent },
       { path: 'panier', component: PanierComponent },
       { path: 'connexion', component: ConnexionComponent },
       
