@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CategorieService } from '../categorie.service';
 import { Produit } from '../models/produit';
 import { ProduitService } from '../produit.service';
 import { switchMap } from 'rxjs/operators';
@@ -13,15 +12,14 @@ import { switchMap } from 'rxjs/operators';
 export class ProduitsComponent {
 
   produits: Produit[] = [];
-  produitsFiltres: Produit[] = [];
-  categories$;
+  produitsFiltres: Produit[] = []; 
   categorie: string;
   
 
   constructor(
     route: ActivatedRoute,
     produitService: ProduitService, 
-    categorieService: CategorieService) {
+    ) {
 
     produitService
       .getListeProduits()
@@ -38,7 +36,7 @@ export class ProduitsComponent {
           this.produits;
       });     
 
-    this.categories$ = categorieService.getCategories();
+    
 
    }
 
