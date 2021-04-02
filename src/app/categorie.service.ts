@@ -10,6 +10,6 @@ export class CategorieService {
   constructor(private bd: AngularFireDatabase) { }
 
   getCategories(){
-    return this.bd.list('/categories', ref => ref.orderByChild('nom')).snapshotChanges();//valueChanges();
+    return this.bd.list('/categories', ref => ref.orderByChild('nom')).snapshotChanges();
   }
 }
