@@ -36,6 +36,7 @@ import { ProduitFormulaireComponent } from './admin/produit-formulaire/produit-f
 import { CategorieService } from './categorie.service';
 import { ProduitService } from './produit.service';
 import { ProduitFiltreComponent } from './produits/produit-filtre/produit-filtre.component';
+import { CatalogueProduitsComponent } from './catalogue-produits/catalogue-produits.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { ProduitFiltreComponent } from './produits/produit-filtre/produit-filtre
     AdminCommandesComponent,
     ConnexionComponent,
     ProduitFormulaireComponent,
-    ProduitFiltreComponent
+    ProduitFiltreComponent,
+    CatalogueProduitsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,20 +1,15 @@
 
 <div class="row">
     <div class="col-3">
+        <!-- render pour @Input categorie -->
         <produit-filtre [categorie]="categorie"></produit-filtre>
     </div>
-    <div class="col-9">
+    <div class="col-9">         <!-- c<est egale a  <div class="col-9"> -->
         <div class="row">
             <ng-container *ngFor="let p of produitsFiltres; let i = index">
                 <div class="col">
-                    <div class="card" style="width: 15rem;">
-                      <img [src]="p.imageUrl" class="card-img-top" alt="Image de produit">
-                      <div class="card-body">
-                        <h5 class="card-title">{{ p.titre }}</h5>
-                        <p class="card-text">{{ p.prix | currency: 'CAD' }}</p>
-                        <a href="#" class="btn btn-primary">Ajouter au panier</a>
-                    </div>
-                </div>   
+                    <!-- render pour @Input produit -->
+                    <catalogue-produits [produit]="p"></catalogue-produits>                
                 </div> 
                 <div *ngIf="(i + 1) % 3 === 0" class="w-100"></div>
             </ng-container>    

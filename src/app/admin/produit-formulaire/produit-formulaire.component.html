@@ -46,13 +46,6 @@
     </div>
     <!-- Carte de produit -->
     <div class="col-md-6">
-        <div *ngIf="produit.titre" class="card" style="width: 18rem;">
-            <img [src]="produit.imageUrl" class="card-img-top" *ngIf="produit.imageUrl">
-            <div class="card-body">
-              <h5 class="card-title">{{ produit.titre }}</h5>
-              <p class="card-text">{{ produit.prix | currency: 'CAD' }}</p>              
-            </div>
-          </div>
+        <catalogue-produits [produit]="produit" [show-actions]="false"></catalogue-produits>
     </div>
 </div>
-
