@@ -1,6 +1,7 @@
 <div class="sticky-top">
     <div class="list-group">
-        <a class="list-group-item list-groupitem-action"
+        <a class="list-group-item  list-groupitem-action"
+        style="color: black;"             
         [class.active]="!categorie"
         routerLink="/"
         >Tous les catégories</a>
@@ -9,6 +10,7 @@
         routerLink="/"
         [queryParams]="{ categorie: c.key}"
         class="list-group-item list-groupitem-action"
+        style="color: black;"
         [class.active]="categorie === c.key"
         >
             {{ c.payload.val().nom }}
