@@ -14,16 +14,8 @@ export class CatalogueProduitsComponent {
   constructor(private panierService: PanierService) { }
 
   ajouterAuPanier(produit: Produit) {
-    let idPanier = localStorage.getItem('idPanier');
-    if(!idPanier){
-      this.panierService.create().then(result => {
-        localStorage.setItem('idPanier', result.key);
-
-        // Ajouter produit au panier
-      });
-    } else {
-      // Ajouter produit au panier
-    }
+    //this.panierService.ajouterAupanier(produit);
+    
   }
 
  
