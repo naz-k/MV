@@ -6,6 +6,8 @@
       
    </div>
    <div class="card-footer d-grid gap-2" >
-      <a *ngIf="showActions" href="#" class="btn btn-outline-warning">Ajouter au panier</a>
+      <button *ngIf="showActions"
+      (click)="ajouterAuPanier(produit)"
+       class="btn btn-outline-warning">Ajouter au panier</button>
    </div>
 </div>
