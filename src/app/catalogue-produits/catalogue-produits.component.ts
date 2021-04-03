@@ -14,7 +14,7 @@ export class CatalogueProduitsComponent {
   constructor(private panierService: PanierService) { }
 
   ajouterAuPanier(produit: Produit) {
-    //this.panierService.ajouterAupanier(produit);
+    this.panierService.ajouterAuPanier(produit);
     
   }
 

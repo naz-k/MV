@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { Produit } from './models/produit';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,14 +22,26 @@ export class PanierService {
     return this.bd.object('/panier/'+idPanier);
   }
 
-  private async recupererOuCreerPanier() { // async c'est pour utiliser await
+  private async recupererOuCreerPanierId() { // async c'est pour utiliser await
     let idPanier = localStorage.getItem('idPanier');
-    if(!idPanier){
-      let resultat = await this.creer(); // Avec await on peut convoquer methode asyncron methode syncron
-      localStorage.setItem('idPanier', resultat.key);
-      return this.recupererPanier(resultat.key); 
-    } 
+    if (idPanier) return idPanier;
+    
+    let resultat = await this.creer(); // Avec await on peut convoquer methode asyncron methode syncron
+    localStorage.setItem('idPanier', resultat.key);
+    return resultat.key;      
+  }
 
-    return this.recupererPanier(idPanier);    
+  async ajouterAuPanier(produit: Produit) {   
+    let idPanier = await this.recupererOuCreerPanierId();
+    let article$ = this.bd.object('/panier/'+ idPanier + '/articles' + produit.key);
+    article$.snapshotChanges().pipe(take(1)).subscribe(article =>{
+      if(article.payload.exists()) {
+        article$.update({quantite: article.payload.exportVal().quantite + 1 });
+      } else {
+        article$.set({ produit: produit, quantite: 1 });   
+      }
+      
+    });
+
   }
 }
