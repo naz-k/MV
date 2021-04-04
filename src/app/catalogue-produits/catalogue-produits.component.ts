@@ -10,6 +10,7 @@ import { PanierService } from '../panier.service';
 export class CatalogueProduitsComponent {
   @Input('produit') produit: Produit;
   @Input('show-actions') showActions = true;
+  @Input('panier') panier;
 
   constructor(private panierService: PanierService) { }
 
@@ -18,6 +19,14 @@ export class CatalogueProduitsComponent {
     
   }
 
- 
+  recupererQuantite() {
+    console.log("TEST-23 ", this.panier['articles'+this.produit.key]);
+    if (!this.panier) return 0;
+
+    // let article = this.panier.articles[this.produit.key];
+    let article = this.panier['articles'+this.produit.key];
+    console.log("TEST-27 ", article);
+    return article ? article.quantite : 0;
+  }
 
 }

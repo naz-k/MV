@@ -5,9 +5,10 @@
       <p class="card-text">{{ produit.prix | currency: 'CAD' }}</p>
       
    </div>
-   <div class="card-footer d-grid gap-2" >
-      <button *ngIf="showActions"
+   <div *ngIf="showActions" class="card-footer d-grid gap-2" >
+      <button 
       (click)="ajouterAuPanier(produit)"
        class="btn btn-outline-warning">Ajouter au panier</button>
    </div>
+   <div>{{ recupererQuantite() }}</div>
 </div>

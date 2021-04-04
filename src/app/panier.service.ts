@@ -18,15 +18,16 @@ export class PanierService {
     })
   }
 
-  private recupererPanier(idPanier: string){
-    return this.bd.object('/panier/'+idPanier);
+  async recupererPanier(){
+    let idPanier = await this.recupererOuCreerPanierId();
+    return this.bd.object('/panier/'+idPanier).valueChanges();
   }
 
   private recupererArticle(idPanier: string, idProduit: string) {
     return this.bd.object('/panier/'+ idPanier + '/articles' + idProduit);
   }
 
-  private async recupererOuCreerPanierId() { // async c'est pour utiliser await
+  private async recupererOuCreerPanierId(): Promise<string> { // async c'est pour utiliser await
     let idPanier = localStorage.getItem('idPanier');
     if (idPanier) return idPanier;
     
