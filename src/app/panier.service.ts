@@ -37,16 +37,25 @@ export class PanierService {
   }
 
   async ajouterAuPanier(produit: Produit) {   
+    this.mettreAJourQuantiteArticle(produit, 1);
+  }
+
+  async retirerDuPanier(produit: Produit) {
+     this.mettreAJourQuantiteArticle(produit, -1);
+  }
+
+  private async mettreAJourQuantiteArticle(produit: Produit, changer: number) {
     let idPanier = await this.recupererOuCreerPanierId();
     let article$ = this.recupererArticle(idPanier, produit.key);
     article$.snapshotChanges().pipe(take(1)).subscribe(article =>{
       if(article.payload.exists()) {
-        article$.update({quantite: article.payload.exportVal().quantite + 1 });
+        article$.update({quantite: article.payload.exportVal().quantite + changer });
       } else {
         article$.set({ produit: produit, quantite: 1 });   
       }
       
-    });
-
+    });  
   }
+
+
 }

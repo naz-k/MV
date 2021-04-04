@@ -8,18 +8,22 @@
    <div *ngIf="showActions" class="card-footer d-grid gap-2" >
       <button 
       *ngIf="recupererQuantite() === 0; else mettreAjourQuantity"
-      (click)="ajouterAuPanier(produit)"
+      (click)="ajouterAuPanier()"
       class="btn btn-outline-warning">Ajouter au panier</button>
      <ng-template #mettreAjourQuantity>
       <div class="row no-gutters">
          <div class="col-2">
-            <button class="btn btn-warning">-</button>
+            <button 
+            (click)="retirerDuPanier()"
+            class="btn btn-warning">-</button>
          </div>
          <div class="col text-center" style="color: orange;">
             {{ recupererQuantite() }} dans chariot
          </div>
          <div class="col-2">
-            <button class="btn btn-warning">+</button>
+            <button 
+            (click)="ajouterAuPanier()"
+            class="btn btn-warning">+</button>
          </div>
       </div>
      </ng-template>       
