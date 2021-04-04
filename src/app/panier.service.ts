@@ -22,6 +22,10 @@ export class PanierService {
     return this.bd.object('/panier/'+idPanier);
   }
 
+  private recupererArticle(idPanier: string, idProduit: string) {
+    return this.bd.object('/panier/'+ idPanier + '/articles' + idProduit);
+  }
+
   private async recupererOuCreerPanierId() { // async c'est pour utiliser await
     let idPanier = localStorage.getItem('idPanier');
     if (idPanier) return idPanier;
@@ -33,7 +37,7 @@ export class PanierService {
 
   async ajouterAuPanier(produit: Produit) {   
     let idPanier = await this.recupererOuCreerPanierId();
-    let article$ = this.bd.object('/panier/'+ idPanier + '/articles' + produit.key);
+    let article$ = this.recupererArticle(idPanier, produit.key);
     article$.snapshotChanges().pipe(take(1)).subscribe(article =>{
       if(article.payload.exists()) {
         article$.update({quantite: article.payload.exportVal().quantite + 1 });
