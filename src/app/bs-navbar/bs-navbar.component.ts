@@ -31,16 +31,7 @@ export class BsNavbarComponent implements OnInit {
     this.auth.appUsager$.subscribe(appUsager => this.appUsager = appUsager); 
 
     this.chariot$ = (await this.panierService.recupererPanier());
-
-    ///let chariot$ = await this.panierService.recupererPanier();
-    /*chariot$.valueChanges().subscribe(chariot => { 
-      console.log('chariot.articles ::',chariot.articles)    
-       this.nombreArticlesPanier = 0;
-       for (let idProduit in chariot.articles) {   
-         this.nombreArticlesPanier += chariot.articles[idProduit].quantite;                          
-       }
-      //console.log('Test : this.nombreArticlesPanier ',this.nombreArticlesPanier);
-    });*/
+    
   }
  
 
