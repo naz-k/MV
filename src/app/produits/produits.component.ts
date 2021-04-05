@@ -44,7 +44,7 @@ export class ProduitsComponent implements OnInit, OnDestroy{
 
 
   async ngOnInit() {
-    this.subscription = (await this.panierservice.recupererPanier())
+    this.subscription = (await (await this.panierservice.recupererPanier()).valueChanges())
       .subscribe(chariot => this.chariot = chariot);
   }
 

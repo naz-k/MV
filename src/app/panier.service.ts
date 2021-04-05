@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { Produit } from './models/produit';
 import { take } from 'rxjs/operators';
+import { Panier } from './models/panier';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,9 @@ export class PanierService {
     })
   }
 
-  async recupererPanier(){
+  async recupererPanier(): Promise<AngularFireObject<Panier>> {
     let idPanier = await this.recupererOuCreerPanierId();
-    return this.bd.object('/panier/'+idPanier).valueChanges();
+    return this.bd.object('/panier/'+idPanier);
   }
 
   private recupererArticle(idPanier: string, idProduit: string) {
