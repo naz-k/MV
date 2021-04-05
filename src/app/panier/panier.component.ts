@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PanierService } from '../panier.service';
 
 @Component({
   selector: 'app-panier',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./panier.component.css']
 })
 export class PanierComponent implements OnInit {
+  chariot$;
+  constructor(private panierService: PanierService) { }
 
-  constructor() { }
-
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+   this.chariot$ = await this.panierService.recupererPanier();
   }
 
 }

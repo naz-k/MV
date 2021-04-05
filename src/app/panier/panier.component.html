@@ -1,1 +1,30 @@
-<p>panier works!</p>
+
+<h1>Panier</h1>
+<ng-container *ngIf="chariot$ | async as chariot">
+    <p>
+        Vous avez {{ chariot.nbrTotalArticles }} articles dans votre panier.
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Article</th>
+                <th>Nombre</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let idProduit of chariot.idsDesProduits">
+                <td>
+                    {{ chariot.articles[idProduit].produit.titre }}
+                </td>
+                <td>
+                    {{ chariot.articles[idProduit].quantite }}
+                </td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</ng-container>
+
+
+

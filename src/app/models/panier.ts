@@ -6,6 +6,10 @@ export class Panier {
     constructor(donnees?: Partial<Panier>) {
         Object.assign(this, donnees);
       }
+    
+    get idsDesProduits(){
+        return Object.keys(this.articles)
+    }
 
     get nbrTotalArticles() {
        let nbr = 0;
