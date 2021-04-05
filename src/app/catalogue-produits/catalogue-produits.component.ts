@@ -23,12 +23,11 @@ export class CatalogueProduitsComponent {
   }
 
   recupererQuantite() {
-    // console.log("TEST-23 ", this.panier['articles'+this.produit.key]);
+    //console.log("TEST-26 ", this.panier.articles[this.produit.key]);
     if (!this.panier) return 0;
-
-    // let article = this.panier.articles[this.produit.key];
-    let article = this.panier['articles'+this.produit.key];
-    // console.log("TEST-27 ", article);
+    
+    let article = this.panier.articles[this.produit.key]
+     // console.log("TEST-31 ", article);
     return article ? article.quantite : 0;
   }
 

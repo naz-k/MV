@@ -12,6 +12,9 @@
             <span class="badge rounded-pill bg-warning text-dark"> 
               {{ nombreArticlesPanier }}
             </span>
+            <!-- <span class="badge rounded-pill bg-warning text-dark" *ngIf="chariot$ | async as chariot"> 
+              {{ chariot.nbrTotalArticles() }}
+            </span> -->
           </a>
         </li> 
         <ng-template #anonymousUser>

@@ -25,7 +25,7 @@ export class PanierService {
   }
 
   private recupererArticle(idPanier: string, idProduit: string) {
-    return this.bd.object('/panier/'+ idPanier + '/articles' + idProduit);
+    return this.bd.object('/panier/'+ idPanier + '/articles/' + idProduit); 
   }
 
   private async recupererOuCreerPanierId(): Promise<string> { // async c'est pour utiliser await
@@ -33,6 +33,7 @@ export class PanierService {
     if (idPanier) return idPanier;
     
     let resultat = await this.creer(); // Avec await on peut convoquer methode asyncron methode syncron
+    //console.log('resultat.key', resultat.key);
     localStorage.setItem('idPanier', resultat.key);
     return resultat.key;      
   }
@@ -49,7 +50,9 @@ export class PanierService {
     let idPanier = await this.recupererOuCreerPanierId();
     let article$ = this.recupererArticle(idPanier, produit.key);
     article$.snapshotChanges().pipe(take(1)).subscribe(article =>{
+      //console.log('article', article);
       if(article.payload.exists()) {
+        //console.log('articleQ', article.payload.exportVal().quantite);
         article$.update({quantite: article.payload.exportVal().quantite + changer });
       } else {
         article$.set({ produit: produit, quantite: 1 });   
