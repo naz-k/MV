@@ -12,9 +12,9 @@ import { PanierService } from '../panier.service';
 })
 export class BsNavbarComponent implements OnInit {  
   appUsager: AppUsager;
-  nombreArticlesPanier: number = 0;
-  ////chariot$: Observable<Panier>;
-
+  // nombreArticlesPanier: number = 0;
+  chariot$: Observable<Panier>;
+  
   constructor(
     private auth: AuthService,
     private panierService: PanierService
@@ -29,16 +29,21 @@ export class BsNavbarComponent implements OnInit {
 
   async ngOnInit(){
     this.auth.appUsager$.subscribe(appUsager => this.appUsager = appUsager); 
-    let chariot$ = await this.panierService.recupererPanier();
-    chariot$.valueChanges().subscribe(chariot => {   
-      //console.log('chariot.articles ::',chariot.articles)    
-      this.nombreArticlesPanier = 0;
-      for (let idProduit in chariot.articles) {   
-        this.nombreArticlesPanier += chariot.articles[idProduit].quantite;                          
-      }
+
+    this.chariot$ = (await this.panierService.recupererPanier());
+
+    ///let chariot$ = await this.panierService.recupererPanier();
+    /*chariot$.valueChanges().subscribe(chariot => { 
+      console.log('chariot.articles ::',chariot.articles)    
+       this.nombreArticlesPanier = 0;
+       for (let idProduit in chariot.articles) {   
+         this.nombreArticlesPanier += chariot.articles[idProduit].quantite;                          
+       }
       //console.log('Test : this.nombreArticlesPanier ',this.nombreArticlesPanier);
-    });
+    });*/
   }
  
 
 }
+
+

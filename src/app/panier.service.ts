@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { Produit } from './models/produit';
-import { take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { Panier } from './models/panier';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,13 +20,19 @@ export class PanierService {
     })
   }
 
-  async recupererPanier(): Promise<AngularFireObject<Panier>> {
+ 
+
+  async recupererPanier(): Promise<Observable<Panier>> {
     let idPanier = await this.recupererOuCreerPanierId();
-    return this.bd.object('/panier/'+idPanier);
+    return this.bd.object('/panier/'+idPanier)
+    .valueChanges()
+    .pipe(map( x => new Panier(x) )
+    );
+
   }
 
   private recupererArticle(idPanier: string, idProduit: string) {
-    return this.bd.object('/panier/'+ idPanier + '/articles/' + idProduit); 
+    return this.bd.object('/panier/'+ idPanier + '/articles/' + idProduit);
   }
 
   private async recupererOuCreerPanierId(): Promise<string> { // async c'est pour utiliser await
