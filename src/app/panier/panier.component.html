@@ -13,12 +13,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let idProduit of chariot.idsDesProduits">
+            <!-- <tr *ngFor="let idProduit of chariot.idsDesProduits"> -->
+            <tr *ngFor="let article of chariot.articles">
                 <td>
-                    {{ chariot.articles[idProduit].produit.titre }}
+                    <!-- {{ chariot.articles[idProduit].produit.titre }} -->
+                    {{ article.produit.titre }}
                 </td>
                 <td>
-                    {{ chariot.articles[idProduit].quantite }}
+                    <!-- {{ chariot.articles[idProduit].quantite }} -->
+                    {{ article.quantite }}
                 </td>
                 <td></td>
             </tr>

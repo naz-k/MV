@@ -1,6 +1,11 @@
 import { Produit } from "./produit";
 
-export interface PanierArticle {
+export class PanierArticle {
     produit: Produit;
     quantite: number;
+
+    constructor(init?: Partial<PanierArticle>) {
+        Object.assign(this, init);
+      }
 }
+

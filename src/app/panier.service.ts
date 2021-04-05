@@ -4,6 +4,7 @@ import { Produit } from './models/produit';
 import { map, take } from 'rxjs/operators';
 import { Panier } from './models/panier';
 import { Observable } from 'rxjs';
+import { PanierArticle } from './models/panier-article';
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +27,12 @@ export class PanierService {
     let idPanier = await this.recupererOuCreerPanierId();
     return this.bd.object('/panier/'+idPanier)
     .valueChanges()
-    .pipe(map( x => new Panier(x) )
-    );
+    .pipe(map( (x: { articles: { [idProduit: string]: PanierArticle }}) => {
+      console.log('test-x.articles :',x.articles);
+      return new Panier(x.articles);
+     }));
+    // .pipe(map( (x:any) => new Panier(x.articles) )
+    // );
 
   }
 
