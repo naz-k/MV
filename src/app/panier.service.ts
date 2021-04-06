@@ -28,9 +28,12 @@ export class PanierService {
     return this.bd.object('/panier/'+idPanier)
     .valueChanges()
     .pipe(map( (x: { articles: { [idProduit: string]: PanierArticle }}) => {
-      //console.log('test-x.articles :',x.articles);
+      console.log('test-x.articles :',x.articles);
       return new Panier(x.articles);
      }));
+    // .pipe(map( (x:any) => new Panier(x.articles) )
+    // );
+
   }
 
   private recupererArticle(idPanier: string, idProduit: string) {
