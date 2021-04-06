@@ -1,4 +1,5 @@
 import { PanierArticle } from "./panier-article";
+import { Produit } from "./produit";
 
 export class Panier {
    articles: PanierArticle[] = [];
@@ -12,12 +13,17 @@ export class Panier {
        }
           
    }
-
-
-
+     // pour le utiliser apres: 
     // constructor(donnees?: Partial<Panier> ) {
     //     Object.assign(this, donnees);
     // }
+
+    recupererQuantite(produit: Produit) {   
+        console.log("TEST_produit : ", produit);     
+        let article = this.mapArticles[produit.key];        
+        return article ? article.quantite : 0;
+      }
+    
     
     get idsDesProduits(){
         return Object.keys(this.articles)

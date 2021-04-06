@@ -37,6 +37,7 @@ import { CategorieService } from './categorie.service';
 import { ProduitService } from './produit.service';
 import { ProduitFiltreComponent } from './produits/produit-filtre/produit-filtre.component';
 import { CatalogueProduitsComponent } from './catalogue-produits/catalogue-produits.component';
+import { QuantiteProduitComponent } from './quantite-produit/quantite-produit.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { CatalogueProduitsComponent } from './catalogue-produits/catalogue-produ
     ConnexionComponent,
     ProduitFormulaireComponent,
     ProduitFiltreComponent,
-    CatalogueProduitsComponent
+    CatalogueProduitsComponent,
+    QuantiteProduitComponent
   ],
   imports: [
     BrowserModule,

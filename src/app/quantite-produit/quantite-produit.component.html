@@ -1,0 +1,15 @@
+<div class="row no-gutters">
+    <div class="col-2">
+       <button 
+       (click)="retirerDuPanier()"
+       class="btn btn-warning">-</button>
+    </div>
+    <div class="col text-center" style="color: orange;">
+       {{ panier.recupererQuantite(produit) }} dans le panier
+    </div>
+    <div class="col-2">
+       <button 
+       (click)="ajouterAuPanier()"
+       class="btn btn-warning">+</button>
+    </div>
+ </div>
