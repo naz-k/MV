@@ -23,6 +23,13 @@ export class Panier {
         return Object.keys(this.articles)
     }
 
+    get prixTotal() {
+        let totale = 0;
+        for (let idProduit in this.articles)
+            totale += this.articles[idProduit].prixTotal;
+        return totale;
+    }
+
     get nbrTotalArticles() {
        let nbr = 0;
         for (let idProduit in this.articles) {                   

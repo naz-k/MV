@@ -8,8 +8,8 @@
         <thead>
             <tr>
                 <th>Article</th>
-                <th>Nombre</th>
-                <th></th>
+                <th>Quantité</th>
+                <th>prix</th>
             </tr>
         </thead>
         <tbody>
@@ -23,9 +23,19 @@
                     <!-- {{ chariot.articles[idProduit].quantite }} -->
                     {{ article.quantite }}
                 </td>
-                <td></td>
+                <td>
+                    <!-- {{ article.produit.prix * article.quantite }} -->
+                    {{ article.prixTotal | currency: 'USD' }}
+                </td>
             </tr>
         </tbody>
+        <tfoot>
+           <tr>
+               <th></th>
+               <th></th>
+               <th>{{ chariot.prixTotal | currency: 'USD' }}</th>
+           </tr>
+        </tfoot>
     </table>
 </ng-container>
 

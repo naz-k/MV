@@ -6,6 +6,12 @@ export class PanierArticle {
 
     constructor(init?: Partial<PanierArticle>) {
         Object.assign(this, init);
-      }
+    }
+
+
+    get prixTotal(){
+        return this.produit.prix * this.quantite;
+    }
+
 }
 
