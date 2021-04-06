@@ -12,19 +12,15 @@
                 <th>prix</th>
             </tr>
         </thead>
-        <tbody>
-            <!-- <tr *ngFor="let idProduit of chariot.idsDesProduits"> -->
+        <tbody>            
             <tr *ngFor="let article of chariot.articles">
-                <td>
-                    <!-- {{ chariot.articles[idProduit].produit.titre }} -->
+                <td>                   
                     {{ article.produit.titre }}
                 </td>
-                <td>
-                    <!-- {{ chariot.articles[idProduit].quantite }} -->
-                    {{ article.quantite }}
+                <td>                    
+                    <quantite-produit [produit]="article.produit" [panier]="chariot"></quantite-produit>
                 </td>
-                <td>
-                    <!-- {{ article.produit.prix * article.quantite }} -->
+                <td>                    
                     {{ article.prixTotal | currency: 'USD' }}
                 </td>
             </tr>
@@ -33,7 +29,7 @@
            <tr>
                <th></th>
                <th></th>
-               <th>{{ chariot.prixTotal | currency: 'USD' }}</th>
+               <th>{{ chariot.prixTotal | currency: 'CAD' }}</th>
            </tr>
         </tfoot>
     </table>
