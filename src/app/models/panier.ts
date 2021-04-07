@@ -4,30 +4,23 @@ import { Produit } from "./produit";
 export class Panier {
    articles: PanierArticle[] = [];
 
-   constructor(public mapArticles: { [idProduit: string]: PanierArticle }){
+   constructor(private mapArticles: { [idProduit: string]: PanierArticle }){
        this.mapArticles = mapArticles || {};
        
-       for (const idProduit in mapArticles) {
-            const article = mapArticles[idProduit];
-            this.articles.push(new PanierArticle({produit: article.produit, quantite: article.quantite}));
+       for (let idProduit in mapArticles) {
+            let article = mapArticles[idProduit];            
+            //Operateur spread(...) de Type script, ... itereate tous les proprietes d'article et les ajoutent ici.
+            this.articles.push(new PanierArticle({ ...article, key: idProduit }));
+           
        }
           
    }
-     // pour le utiliser apres: 
-    // constructor(donnees?: Partial<Panier> ) {
-    //     Object.assign(this, donnees);
-    // }
-
+   
     recupererQuantite(produit: Produit) {   
-        console.log("TEST_produit : ", produit);     
+        //console.log("TEST_produit : ", produit);     
         let article = this.mapArticles[produit.key];        
         return article ? article.quantite : 0;
-      }
-    
-    
-    get idsDesProduits(){
-        return Object.keys(this.articles)
-    }
+      }    
 
     get prixTotal() {
         let totale = 0;
@@ -44,3 +37,22 @@ export class Panier {
         return nbr;
     }
 }
+
+ /*
+     articles: PanierArticle[] = [];
+
+      constructor(public mapArticles: { [idProduit: string]: PanierArticle }){
+       this.mapArticles = mapArticles || {};
+       
+       for (const idProduit in mapArticles) {
+            const article = mapArticles[idProduit];
+            this.articles.push(new PanierArticle({produit: article.produit, quantite: article.quantite}));
+       }
+          
+   }
+    */
+
+     // pour le utiliser apres: 
+    // constructor(donnees?: Partial<Panier> ) {
+    //     Object.assign(this, donnees);
+    // }

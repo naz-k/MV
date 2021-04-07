@@ -14,4 +14,8 @@ export class PanierComponent implements OnInit {
    this.chariot$ = await this.panierService.recupererPanier();
   }
 
+  effacerPanier() {
+    this.panierService.effacerPanier();
+  }
+
 }

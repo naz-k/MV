@@ -9,20 +9,12 @@ import { PanierArticle } from './models/panier-article';
 @Injectable({
   providedIn: 'root'
 })
-export class PanierService {
+export class PanierService {  
 
   constructor(
     private bd: AngularFireDatabase
     ) { }
-
-  private creer(){
-    return this.bd.list('/panier').push({
-      dateCree: new Date().getTime()
-    })
-  }
-
- 
-
+  
   async recupererPanier(): Promise<Observable<Panier>> {
     let idPanier = await this.recupererOuCreerPanierId();
     return this.bd.object('/panier/'+idPanier)
@@ -30,8 +22,27 @@ export class PanierService {
     .pipe(map( (x: { articles: { [idProduit: string]: PanierArticle }}) => {
       //console.log('test-x.articles :',x.articles);
       return new Panier(x.articles);
-     }));
+      }));
   }
+
+  async ajouterAuPanier(produit: Produit) {   
+    this.mettreAJourArticle(produit, 1);
+  }
+
+  async retirerDuPanier(produit: Produit) {
+      this.mettreAJourArticle(produit, -1);
+  }
+
+  async effacerPanier() {
+     let idPanier = await this.recupererOuCreerPanierId(); 
+     this.bd.object('/panier/' + idPanier + '/articles').remove();
+  }
+
+  private creer(){
+    return this.bd.list('/panier').push({
+      dateCree: new Date().getTime()
+    })
+  }  
 
   private recupererArticle(idPanier: string, idProduit: string) {
     return this.bd.object('/panier/'+ idPanier + '/articles/' + idProduit);
@@ -45,30 +56,78 @@ export class PanierService {
     //console.log('resultat.key', resultat.key);
     localStorage.setItem('idPanier', resultat.key);
     return resultat.key;      
-  }
+  }  
 
-  async ajouterAuPanier(produit: Produit) {   
-    this.mettreAJourQuantiteArticle(produit, 1);
-  }
-
-  async retirerDuPanier(produit: Produit) {
-     this.mettreAJourQuantiteArticle(produit, -1);
-  }
-
-  private async mettreAJourQuantiteArticle(produit: Produit, changer: number) {
-    let idPanier = await this.recupererOuCreerPanierId();
-    let article$ = this.recupererArticle(idPanier, produit.key);
+  private async mettreAJourArticle(produit: Produit, changer: number) {
+    let idPanier = await this.recupererOuCreerPanierId();    
+    let article$ = this.recupererArticle(idPanier, produit.key.valueOf());    
     article$.snapshotChanges().pipe(take(1)).subscribe(article =>{
-      //console.log('article', article);
-      if(article.payload.exists()) {
-        //console.log('articleQ', article.payload.exportVal().quantite);
-        article$.update({quantite: article.payload.exportVal().quantite + changer });
+      //console.log('TEST-article: ', article.payload.exportVal());
+      if(article.payload.exists()) { 
+        article$.update({
+          titre: produit.titre,
+          imageUrl: produit.imageUrl,
+          prix: produit.prix,        
+          quantite: (article.payload.exportVal().quantite || 0) + changer
+        }); 
+        let quantite = 0;
+        quantite = (article.payload.exportVal().quantite || 0) + changer 
+        //console.log("test quantite", quantite);
+        if (quantite === 0) article$.remove();    
       } else {
-        article$.set({ produit: produit, quantite: 1 });   
+        article$.update({
+          titre: produit.titre,
+          imageUrl: produit.imageUrl,
+          prix: produit.prix,        
+          quantite: 1
+        });  
       }
-      
+           
     });  
   }
 
+ 
+
 
 }
+
+
+
+
+//--------ancien solution
+/*private async mettreAJourArticle(produit: Produit, changer: number) {
+  let idPanier = await this.recupererOuCreerPanierId();    
+  let article$ = this.recupererArticle(idPanier, produit.key.valueOf());    
+  article$.snapshotChanges().pipe(take(1)).subscribe(article =>{
+    //console.log('TEST-article: ', article.payload.exportVal());
+    
+        let quantite = (article.payload.exportVal().quantite || 0) + changer;
+        // console.log("quantite -test ", quantite);
+        if (quantite ===0 ) article$.remove();          
+        else 
+        article$.update({
+          titre: produit.titre,
+          imageUrl: produit.imageUrl,
+          prix: produit.prix,        
+          quantite: quantite
+        });      
+  });  
+}*/
+
+
+ /*private async mettreAJourQuantiteArticle(produit: Produit, changer: number) {
+    let idPanier = await this.recupererOuCreerPanierId();
+    let article$ = this.recupererArticle(idPanier, produit.key);
+    article$.snapshotChanges().pipe(take(1)).subscribe(article =>{
+        if(article.payload.exists()) {        
+          article$.update({quantite: article.payload.exportVal().quantite + changer });
+          let quantite = 0;
+          quantite = (article.payload.exportVal().quantite || 0) + changer 
+          //console.log("test quantite", quantite);
+          if (quantite === 0) article$.remove();  
+
+        } else {
+          article$.set({ produit: produit, quantite: 1 });   
+        }        
+    });  
+  }*/

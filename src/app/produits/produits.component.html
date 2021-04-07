@@ -4,8 +4,8 @@
         <!-- render pour @Input categorie -->
         <produit-filtre [categorie]="categorie"></produit-filtre>
     </div>
-    <div class="col-9">         <!-- c<est egale a  <div class="col-9"> -->
-        <div class="row">
+    <div class="col-9">         
+        <div class="row" *ngIf="chariot$ | async as chariot">
             <ng-container *ngFor="let p of produitsFiltres; let i = index">
                 <div class="col">
                     <!-- render pour @Input produit -->

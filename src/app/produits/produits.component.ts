@@ -1,62 +1,64 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Produit } from '../models/produit';
 import { ProduitService } from '../produit.service';
 import { switchMap } from 'rxjs/operators';
 import { PanierService } from '../panier.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { Panier } from '../models/panier';
 
 @Component({
   selector: 'app-produits',
   templateUrl: './produits.component.html',
   styleUrls: ['./produits.component.css']
 })
-export class ProduitsComponent implements OnInit, OnDestroy{
+export class ProduitsComponent implements OnInit{
 
   produits: Produit[] = [];
   produitsFiltres: Produit[] = []; 
   categorie: string;
-  chariot: any;
-  subscription: Subscription;
+  chariot$: Observable<Panier>;
+ 
   
 
   constructor(
-    route: ActivatedRoute,
-    produitService: ProduitService, 
+    private route: ActivatedRoute,
+    private produitService: ProduitService, 
     private panierservice: PanierService
     ) {      
 
-    produitService
-      .getListeProduits()
-      .pipe(switchMap(produits => {
-        this.produits = produits; 
-        return route.queryParamMap;
-      })) 
-      .subscribe(params => {
-        this.categorie = params.get('categorie');
-
-        // mettre produits filtres
-        this.produitsFiltres = (this.categorie) ?
-          this.produits.filter(p => p.categorie === this.categorie) :
-          this.produits;
-      }); 
+    
    }
 
 
   async ngOnInit() {
-    this.subscription = (await this.panierservice.recupererPanier())
-      .subscribe(chariot => {
-        this.chariot = chariot
-        //console.log("Chariot : ", this.chariot);
-      });
-
-      
+    this.chariot$ = await this.panierservice.recupererPanier();  
+     this.assignerProduits();
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  private assignerProduits(){    
+    this.produitService
+      .getListeProduits()
+      .pipe(switchMap(produits => {
+        this.produits = produits; 
+        return this.route.queryParamMap;
+    })) 
+    .subscribe(params => {
+      this.categorie = params.get('categorie');
+
+      // mettre produits filtres
+      this.appliquerFiltres();
+    });   
   }
 
+  private appliquerFiltres(){
+     // mettre produits filtres
+     this.produitsFiltres = (this.categorie) ?
+     this.produits.filter(p => p.categorie === this.categorie) :
+     this.produits;
+  }
+
+  
   
 
 }

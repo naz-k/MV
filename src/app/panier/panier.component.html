@@ -1,26 +1,32 @@
 
 <h1>Panier</h1>
-<ng-container *ngIf="chariot$ | async as chariot">
+<div  class="row col-10" *ngIf="chariot$ | async as chariot">
     <p>
         Vous avez {{ chariot.nbrTotalArticles }} articles dans votre panier.
     </p>
     <table class="table">
         <thead>
             <tr>
-                <th>Article</th>
-                <th>Quantité</th>
-                <th>prix</th>
+                <th></th>
+                <th >Article</th>
+                <th class="text-center" style="width: 230px;">Quantité</th>
+                <th class="text-center" >prix</th>
             </tr>
         </thead>
         <tbody>            
             <tr *ngFor="let article of chariot.articles">
+                <td>
+                    <div [style.background-image]="'url(' + article.imageUrl + ')'" class="miniature" ></div>
+                </td>
                 <td>                   
-                    {{ article.produit.titre }}
+                    <!-- {{ article.produit.titre }} -->
+                    {{ article.titre }}
                 </td>
                 <td>                    
-                    <quantite-produit [produit]="article.produit" [panier]="chariot"></quantite-produit>
+                    <!-- <quantite-produit [produit]="article.produit" [panier]="chariot"></quantite-produit> -->
+                    <quantite-produit [produit]="article" [panier]="chariot"></quantite-produit>
                 </td>
-                <td>                    
+                <td class="text-center">                    
                     {{ article.prixTotal | currency: 'USD' }}
                 </td>
             </tr>
@@ -29,11 +35,17 @@
            <tr>
                <th></th>
                <th></th>
-               <th>{{ chariot.prixTotal | currency: 'CAD' }}</th>
+               <th></th>
+               <th class="text-center">{{ chariot.prixTotal | currency: 'CAD' }}</th>
            </tr>
         </tfoot>
     </table>
-</ng-container>
+</div>    
+<div>
+    <button 
+    (click)="effacerPanier()"
+    class="btn btn-danger btn-sm">Effacer Panier</button>
+</div>
 
 
 
