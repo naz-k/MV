@@ -3,6 +3,10 @@
 <div  class="row col-10" *ngIf="chariot$ | async as chariot">
     <p>
         Vous avez {{ chariot.nbrTotalArticles }} articles dans votre panier.
+        <button 
+         (click)="effacerPanier()"
+         class="btn btn-light btn-sm">Effacer Panier
+        </button>
     </p>
     <table class="table">
         <thead>
@@ -38,12 +42,15 @@
            </tr>
         </tfoot>
     </table>
+    <div>
+        <a 
+        *ngIf="chariot.articles.length"
+        routerLink="/verification"
+        class="btn btn-primary">Vérification</a>        
+    </div>
+
 </div>    
-<div>
-    <button 
-    (click)="effacerPanier()"
-    class="btn btn-danger btn-sm">Effacer Panier</button>
-</div>
+
 
 
 
