@@ -18,12 +18,10 @@
                 <td>
                     <div [style.background-image]="'url(' + article.imageUrl + ')'" class="miniature" ></div>
                 </td>
-                <td>                   
-                    <!-- {{ article.produit.titre }} -->
+                <td>      
                     {{ article.titre }}
                 </td>
                 <td>                    
-                    <!-- <quantite-produit [produit]="article.produit" [panier]="chariot"></quantite-produit> -->
                     <quantite-produit [produit]="article" [panier]="chariot"></quantite-produit>
                 </td>
                 <td class="text-center">                    
