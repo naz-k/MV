@@ -5,11 +5,12 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './verification.component.html',
   styleUrls: ['./verification.component.css']
 })
-export class VerificationComponent implements OnInit {
+export class VerificationComponent  {
 
-  constructor() { }
+  livraison: any = {};
 
-  ngOnInit(): void {
+  passerCommande() {
+    console.log(this.livraison);
   }
 
 }
