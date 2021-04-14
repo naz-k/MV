@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { CommandeService } from '../commande.service';
@@ -21,6 +22,7 @@ export class VerificationComponent implements OnInit, OnDestroy {
   
 
   constructor(
+    private router: Router,
     private authService: AuthService,
     private commandeService: CommandeService,
     private panierService: PanierService) {}
@@ -29,7 +31,7 @@ export class VerificationComponent implements OnInit, OnDestroy {
     let panier$ = await this.panierService.recupererPanier();
     this.panierSubscription = panier$.subscribe(panier => this.panier = panier);
     //uid: est un identifiant unique que Firebase consacre a chaque usager.
-    this.authService.user$.subscribe(usager => this.idUsager = usager.uid)  
+    this.usagerSubscription = this.authService.user$.subscribe(usager => this.idUsager = usager.uid)  
   }
 
   ngOnDestroy() {
@@ -37,11 +39,13 @@ export class VerificationComponent implements OnInit, OnDestroy {
     this.usagerSubscription.unsubscribe();
   }
 
-  passerCommande() {
+  async passerCommande() {
     let commande = new Commande(this.idUsager, this.livraison, this.panier);
     //console.log(this.livraison);
 
-    this.commandeService.stockerCommande(commande);
+    let resultat = await this.commandeService.stockerCommande(commande);
+    //console.log(resultat, resultat.key);
+    this.router.navigate(['/commande-reussie', resultat.key]);
   }
 
 }

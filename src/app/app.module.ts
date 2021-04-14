@@ -76,7 +76,7 @@ import { QuantiteProduitComponent } from './quantite-produit/quantite-produit.co
       { path: 'connexion', component: ConnexionComponent },
       
       { path: 'verification', component: VerificationComponent, canActivate: [AuthGuardService] },
-      { path: 'commande-reussie', component: CommandeReussieComponent, canActivate: [AuthGuardService] },
+      { path: 'commande-reussie/:id', component: CommandeReussieComponent, canActivate: [AuthGuardService] },
       { path: 'mes/commandes', component: MesCommandesComponent, canActivate: [AuthGuardService] },
       
       
