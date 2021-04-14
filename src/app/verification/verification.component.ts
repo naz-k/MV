@@ -43,8 +43,8 @@ export class VerificationComponent implements OnInit, OnDestroy {
     let commande = new Commande(this.idUsager, this.livraison, this.panier);
     //console.log(this.livraison);
 
-    let resultat = await this.commandeService.stockerCommande(commande);
-    //console.log(resultat, resultat.key);
+    let resultat = await this.commandeService.passerCommande(commande);
+    //console.log(resultat, resultat.key);    
     this.router.navigate(['/commande-reussie', resultat.key]);
   }
 
