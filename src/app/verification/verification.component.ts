@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { CommandeService } from '../commande.service';
+import { Commande } from '../models/commande';
 import { Panier } from '../models/panier';
 import { PanierService } from '../panier.service';
 
@@ -37,23 +38,8 @@ export class VerificationComponent implements OnInit, OnDestroy {
   }
 
   passerCommande() {
+    let commande = new Commande(this.idUsager, this.livraison, this.panier);
     //console.log(this.livraison);
-    let commande = {
-      idUsager: this.idUsager,
-      dateCommande: new Date().getTime(),
-      livraison: this.livraison,
-      articles: this.panier.articles.map( a => {
-        return {
-          produit: {
-            titre: a.titre,
-            imageUrl: a.imageUrl,
-            prix: a.prix
-          },
-          quantite: a.quantite,
-          prixTotal: a.prixTotal
-        }
-      })
-    };
 
     this.commandeService.stockerCommande(commande);
   }
