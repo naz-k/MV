@@ -1,0 +1,20 @@
+<div class="card" >    
+    <div class="card-body">
+      <h4 class="card-title">Résumé de la commande</h4>
+      <p class="card-text" *ngIf="panier">Vous avez {{ panier.nbrTotalArticles }} articles dans votre panier.</p>
+      <ul class="list-group list-group-flush" *ngIf="panier">
+          <li *ngFor="let article of panier.articles" class="list-group-item">
+              {{ article.quantite }} × {{ article.titre }}
+              <div class="float-right">
+                  {{ article.prixTotal | currency: 'USD'}}
+              </div>
+          </li>
+          <li class="list-group-item font-weight-bold">
+              <h5>Total </h5>
+              <div class="float-right">
+                  <h5>{{ panier.prixTotal | currency: "CAD" }}</h5>
+              </div>
+          </li>
+      </ul>
+    </div>
+  </div>

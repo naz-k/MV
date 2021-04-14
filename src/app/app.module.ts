@@ -38,6 +38,7 @@ import { ProduitService } from './produit.service';
 import { ProduitFiltreComponent } from './produits/produit-filtre/produit-filtre.component';
 import { CatalogueProduitsComponent } from './catalogue-produits/catalogue-produits.component';
 import { QuantiteProduitComponent } from './quantite-produit/quantite-produit.component';
+import { ResumePanierComponent } from './resume-panier/resume-panier.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { QuantiteProduitComponent } from './quantite-produit/quantite-produit.co
     ProduitFormulaireComponent,
     ProduitFiltreComponent,
     CatalogueProduitsComponent,
-    QuantiteProduitComponent
+    QuantiteProduitComponent,
+    ResumePanierComponent
   ],
   imports: [
     BrowserModule,

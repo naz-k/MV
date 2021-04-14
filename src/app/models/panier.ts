@@ -38,21 +38,4 @@ export class Panier {
     }
 }
 
- /*
-     articles: PanierArticle[] = [];
-
-      constructor(public mapArticles: { [idProduit: string]: PanierArticle }){
-       this.mapArticles = mapArticles || {};
-       
-       for (const idProduit in mapArticles) {
-            const article = mapArticles[idProduit];
-            this.articles.push(new PanierArticle({produit: article.produit, quantite: article.quantite}));
-       }
-          
-   }
-    */
-
-     // pour le utiliser apres: 
-    // constructor(donnees?: Partial<Panier> ) {
-    //     Object.assign(this, donnees);
-    // }
+ 
