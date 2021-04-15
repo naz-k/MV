@@ -39,6 +39,7 @@ import { ProduitFiltreComponent } from './produits/produit-filtre/produit-filtre
 import { CatalogueProduitsComponent } from './catalogue-produits/catalogue-produits.component';
 import { QuantiteProduitComponent } from './quantite-produit/quantite-produit.component';
 import { ResumePanierComponent } from './resume-panier/resume-panier.component';
+import { FormulaireLivraisonComponent } from './formulaire-livraison/formulaire-livraison.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { ResumePanierComponent } from './resume-panier/resume-panier.component';
     ProduitFiltreComponent,
     CatalogueProduitsComponent,
     QuantiteProduitComponent,
-    ResumePanierComponent
+    ResumePanierComponent,
+    FormulaireLivraisonComponent
   ],
   imports: [
     BrowserModule,
