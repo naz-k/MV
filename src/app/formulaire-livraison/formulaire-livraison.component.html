@@ -28,6 +28,7 @@
       </div>
     </div><br>
     <button 
+      [disabled]="!f.valid"
       (click)="passerCommande()"
       class="btn btn-primary">Passer la commande</button>
   </form>
