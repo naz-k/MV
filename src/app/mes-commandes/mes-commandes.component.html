@@ -1,1 +1,19 @@
-<p>mes-commandes works!</p>
+<h3>Commandes </h3><br>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Client</th>
+      <th>Date</th>
+      <th></th>
+    </tr>
+  </thead> 
+  <tbody>
+    <tr *ngFor="let commande of commandes$ | async">
+      <td>{{ commande.livraison.nom }}</td>
+      <td>{{ commande.dateCommande | date}}</td>
+      <td>
+        <a href="#">Détails</a>
+      </td>
+    </tr>
+  </tbody> 
+</table>
