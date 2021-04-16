@@ -1,0 +1,35 @@
+<h3>Détails de la commande  </h3><br><br> <!-- Détail de commande d'admin-->
+<div *ngIf="commande">
+  <h5>Nom de client: {{ commande[0].livraison.nom}}</h5>
+  <h5>Date: {{ commande[0].dateCommande | date}}</h5>
+  <h5>Adresse: </h5>
+  <p style="margin-left: 2cm;">
+    {{commande[0].livraison.addresseLigne1}}, &nbsp;
+    {{commande[0].livraison.addresseLigne2}}, &nbsp;
+    {{commande[0].livraison.ville}}
+  </p>  
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Article</th>
+      <th>Quantité</th>
+      <th>Prix</th>           
+    </tr>    
+  </thead> 
+  <tbody>
+    <tr *ngFor="let article of commandeArticles ">
+      <td>{{ article.produit.titre }}</td>
+      <td>{{ article.quantite }}</td>
+      <td> {{ article.prixTotal | currency: '$' }}</td>      
+    </tr>
+    
+  </tbody> 
+  <tfoot>
+    <tr>
+        <th></th>
+        <th></th>        
+        <th>{{ total | currency: 'CAD' }}</th>
+    </tr>
+ </tfoot>
+</table>

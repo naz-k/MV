@@ -11,9 +11,8 @@
     <tr *ngFor="let commande of commandes$ | async">
       <td>{{ commande.livraison.nom }}</td>
       <td>{{ commande.dateCommande | date}}</td>
-      <td>       
-        <!-- <a [routerLink]="['/admin/commandes/', commande.key]">Détails</a> -->
-        <a [routerLink]="['/admin/commandes/']">Détails</a>
+      <td>            
+        <a [routerLink]="['/admin/commandes/', commande.idUsager]">Détails</a>        
       </td>
     </tr>
   </tbody> 

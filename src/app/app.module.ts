@@ -40,6 +40,7 @@ import { CatalogueProduitsComponent } from './catalogue-produits/catalogue-produ
 import { QuantiteProduitComponent } from './quantite-produit/quantite-produit.component';
 import { ResumePanierComponent } from './resume-panier/resume-panier.component';
 import { FormulaireLivraisonComponent } from './formulaire-livraison/formulaire-livraison.component';
+import { AdminCommandesDetailsComponent } from './admin/admin-commandes-details/admin-commandes-details.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { FormulaireLivraisonComponent } from './formulaire-livraison/formulaire-
     CatalogueProduitsComponent,
     QuantiteProduitComponent,
     ResumePanierComponent,
-    FormulaireLivraisonComponent
+    FormulaireLivraisonComponent,
+    AdminCommandesDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -94,6 +96,10 @@ import { FormulaireLivraisonComponent } from './formulaire-livraison/formulaire-
        },
        { path: 'admin/produits',
         component: AdminProduitsComponent,
+        canActivate: [AuthGuardService, AdminAuthGuardService]
+       },
+       { path: 'admin/commandes/:id',
+        component: AdminCommandesDetailsComponent,
         canActivate: [AuthGuardService, AdminAuthGuardService]
        },
        { path: 'admin/commandes',

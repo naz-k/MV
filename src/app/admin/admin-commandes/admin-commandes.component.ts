@@ -13,7 +13,7 @@ export class AdminCommandesComponent  {
 
   constructor(private commandeService: CommandeService) {
     this.commandes$ = commandeService.recupererCommandes();
-    console.log(this.commandes$);
+    //console.log(this.commandes$);
    }
 
   
