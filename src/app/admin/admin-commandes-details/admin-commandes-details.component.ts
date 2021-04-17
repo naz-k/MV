@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireObject } from '@angular/fire/database';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { CommandeService } from 'src/app/commande.service';
 import { Commande } from 'src/app/models/commande';
@@ -11,7 +11,7 @@ import { Commande } from 'src/app/models/commande';
   templateUrl: './admin-commandes-details.component.html',
   styleUrls: ['./admin-commandes-details.component.css']
 })
-export class AdminCommandesDetailsComponent  {
+export class AdminCommandesDetailsComponent implements OnDestroy  {
 
   commandes$: Observable<any[]>;  
   id;  
@@ -19,6 +19,7 @@ export class AdminCommandesDetailsComponent  {
   commandeArticles;
   commande;
   total: number=0;
+  subscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,7 +29,7 @@ export class AdminCommandesDetailsComponent  {
     //console.log(this.commandes$);
     this.id = this.route.snapshot.paramMap.get('id');
     this.commandeClient = this.commandeService.recupererCommandeParIdUsager(this.id);
-    this.commandeClient.subscribe(c => {
+    this.subscription = this.commandeClient.subscribe(c => {
       this.commande = c;
       //console.log(c);
       this.commandeArticles = c[0].articles;
@@ -41,6 +42,11 @@ export class AdminCommandesDetailsComponent  {
            
     });
    }
+
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+  }
 
 
   
