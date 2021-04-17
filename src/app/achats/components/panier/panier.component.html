@@ -1,0 +1,56 @@
+
+<h1>Panier</h1>
+<div  class="row col-10" *ngIf="chariot$ | async as chariot">
+    <p>
+        Vous avez {{ chariot.nbrTotalArticles }} articles dans votre panier.
+        <button 
+         (click)="effacerPanier()"
+         class="btn btn-light btn-sm" style="background-color: rgb(233, 235, 228);">Effacer Panier
+        </button>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th >Article</th>
+                <th class="text-center" style="width: 230px;">Quantité</th>
+                <th class="text-center" >prix</th>
+            </tr>
+        </thead>
+        <tbody>            
+            <tr *ngFor="let article of chariot.articles">
+                <td>
+                    <div [style.background-image]="'url(' + article.imageUrl + ')'" class="miniature" ></div>
+                </td>
+                <td>      
+                    {{ article.titre }}
+                </td>
+                <td>                    
+                    <quantite-produit [produit]="article" [panier]="chariot"></quantite-produit>
+                </td>
+                <td class="text-center">                    
+                    {{ article.prixTotal | currency: 'USD' }}
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+           <tr>
+               <th></th>
+               <th></th>
+               <th></th>
+               <th class="text-center">{{ chariot.prixTotal | currency: 'CAD' }}</th>
+           </tr>
+        </tfoot>
+    </table>
+    <div>
+        <a 
+        *ngIf="chariot.articles.length"
+        routerLink="/verification"
+        class="btn btn-outline-warning" style="color: #c1d62e;">Vérification</a>        
+    </div>
+
+</div>    
+
+
+
+

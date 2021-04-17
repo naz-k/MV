@@ -1,0 +1,40 @@
+<!-- Boutton pour ajouterun produits à la liste de produits. -->
+
+<p>
+  <a routerLink="/admin/produits/nouveau" class="btn btn-outline-warning" style="color: #c1d62e;">Ajouter Produit</a>
+</p>
+<br>
+
+<!--  Formulaire de Recherche -->
+<!-- <p>    
+    <input 
+    #demande
+    (keyup)="filtrer(demande.value)" 
+    type="text" class="form-control" placeholder="Recherche...">
+</p> -->
+
+
+
+<!-- Tableau qui affiche la liste de produit -->
+<!-- <table class="table"> -->
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">    
+    <thead>
+        <tr>
+            <th></th>
+            <th>Nom de produit</th>
+            <th>Prix</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of produitsFiltres; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ p.titre }}</td>
+            <td>{{ p.prix | currency: '$'}}</td>
+            <td>
+              <a [routerLink]="['/admin/produits/', p.key]" style="color: #c1d62e;" >Modifier</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
