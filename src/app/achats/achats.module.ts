@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -30,7 +31,10 @@ import { VerificationComponent } from './components/verification/verification.co
   ],
   imports: [
     BrowserModule,    
-    CommunModule,    
+    CommunModule,   
+    
+    AngularFireFunctionsModule,
+
     RouterModule.forChild([
       { path: 'produits', component: ProduitsComponent },
       { path: 'panier', component: PanierComponent },
@@ -38,6 +42,6 @@ import { VerificationComponent } from './components/verification/verification.co
       { path: 'commande-reussie/:id', component: CommandeReussieComponent, canActivate: [AuthGuardService] },
       { path: 'mes/commandes', component: MesCommandesComponent, canActivate: [AuthGuardService] }      
     ])
-  ]
+  ],
 })
 export class AchatsModule { }
