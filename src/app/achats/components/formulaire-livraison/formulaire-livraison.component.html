@@ -1,8 +1,8 @@
-<button (click)="payer()">Payer</button>
+<div *ngIf="estPaye == true; else elseBlock">
 
-<h2>Livraison</h2>
+  <h2>Livraison</h2>
 
-<form #f="ngForm">
+  <form #f="ngForm">
     <div class="form-group">
       <label for="">Nom</label>
       <input #nom="ngModel" name="nom" [(ngModel)]="livraison.nom" type="text" class="form-control" required>
@@ -12,14 +12,16 @@
     </div>
     <div class="form-group">
       <label for="">Addresse</label>
-      <input #addresseLigne1="ngModel" name="addresseLigne1" [(ngModel)]="livraison.addresseLigne1" type="text" class="form-control" placeholder="Ligne 1" required>
+      <input #addresseLigne1="ngModel" name="addresseLigne1" [(ngModel)]="livraison.addresseLigne1" type="text"
+        class="form-control" placeholder="Ligne 1" required>
       <div class="alert alert-danger" *ngIf="addresseLigne1.touched && addresseLigne1.invalid">
         <div *ngIf="addresseLigne1.errors.required">Addresse, Ligne 1 est obligatoire.</div>
       </div>
     </div>
     <div class="form-group">
       <label for=""></label>
-      <input #addresseLigne2="ngModel" name="addresseLigne2" [(ngModel)]="livraison.addresseLigne2" type="text" class="form-control" placeholder="Ligne 2" required>
+      <input #addresseLigne2="ngModel" name="addresseLigne2" [(ngModel)]="livraison.addresseLigne2" type="text"
+        class="form-control" placeholder="Ligne 2" required>
       <div class="alert alert-danger" *ngIf="addresseLigne2.touched && addresseLigne2.invalid">
         <div *ngIf="addresseLigne2.errors.required">Address, Ligne 2 est obligatoire.</div>
       </div>
@@ -31,8 +33,13 @@
         <div *ngIf="ville.errors.required">Ville est obligatoire.</div>
       </div>
     </div><br>
-    <button 
-      [disabled]="!f.valid"
-      (click)="passerCommande()"
-      class="btn btn-primary">Passer la commande</button>
+    <button [disabled]="!f.valid" (click)="passerCommande()" class="btn btn-outline-warning"
+      style="color: #c1d62e">Passer la commande</button>
   </form>
+
+</div>
+<ng-template #elseBlock>
+  <div>
+    <button (click)="payer()" class="btn btn-outline-warning" style="color: #c1d62e">Payer votre commande ici</button>
+  </div>
+</ng-template>

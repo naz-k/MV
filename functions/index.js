@@ -22,7 +22,7 @@ exports.creerSessionPaiement = functions.https.onCall(async (data, context) => {
       }
     ],
     mode: 'payment',
-    success_url: 'http://localhost:4200/verification',
+    success_url: 'http://localhost:4200/verification?etat=succes',
     cancel_url: 'http://localhost:4200/panier',
   });
   return session.id;
