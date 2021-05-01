@@ -15,6 +15,12 @@
                   <h5>{{ panier.prixTotal | currency: "CAD" }}</h5>
               </div>
           </li>
+          <li class="list-group-item font-weight-bold">
+              <h5>Total avec taxes</h5>
+              <div class="float-right">
+                  <h5>{{ panier.prixTotal * 1.15 | currency: "CAD" }}</h5>
+              </div>
+          </li>
       </ul>
     </div>
   </div>
